@@ -20,11 +20,12 @@ ActiveRecord::Schema.define(version: 20160929161007) do
     t.string "title"
     t.string "code"
     t.string "color"
-    t.float  "rate"
   end
 
   create_table "meterings", force: :cascade do |t|
-    t.integer "value"
+    t.float   "value"
+    t.integer "month"
+    t.integer "year"
     t.integer "tariff_id"
   end
 

@@ -4,7 +4,6 @@ class CreateCounter < ActiveRecord::Migration
       t.string 'title'
       t.string 'code'
       t.string 'color'
-      t.float 'rate'
     end
 
     create_table :tariffs do |t|
@@ -15,7 +14,9 @@ class CreateCounter < ActiveRecord::Migration
     end
 
     create_table :meterings do |t|
-      t.integer 'value'
+      t.float 'value'
+      t.integer 'month'
+      t.integer 'year'
       t.integer 'tariff_id'
     end
 

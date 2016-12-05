@@ -1,6 +1,6 @@
 class CountersController < ApplicationController
 
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :tariffs]
 
   def index
     @items = Counter.all
@@ -41,6 +41,10 @@ class CountersController < ApplicationController
     else
       redirect_to counters_path, notice: 'Ошибка при удалении'
     end
+  end
+
+  def tariffs
+
   end
 
   private
