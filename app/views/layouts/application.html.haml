@@ -1,0 +1,29 @@
+!!!
+%html
+%head
+%meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+
+- if @page_title.present?
+  - title = @page_title
+- else
+  - title = 'Учет'
+%title= title
+- if @page_description.present?
+  - page_description = @page_description
+- else
+  - page_description ="Счетчики демо"
+%meta{:name => "Description", :content => page_description}
+%meta{:name => "Keywords", :content => ""}
+%meta{:property => "og:title", :content => title}
+%meta{:property => "og:description", :content=>page_description}
+-#%meta{:property => "og:image", :content => ""}
+= stylesheet_link_tag "application", media: "all"
+-#= favicon_link_tag '/ball-green.ico', :rel => 'shortcut icon'
+= javascript_include_tag "application"
+
+= csrf_meta_tags
+%body
+  .container
+    = render 'layouts/navigation'
+    = render 'layouts/messages'
+    = yield

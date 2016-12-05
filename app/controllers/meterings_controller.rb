@@ -1,0 +1,3 @@
+class MeteringsController < ApplicationController
+
+end

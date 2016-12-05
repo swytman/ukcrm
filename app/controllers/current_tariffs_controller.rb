@@ -1,0 +1,3 @@
+class CurrentTariffsController < ApplicationController
+
+end

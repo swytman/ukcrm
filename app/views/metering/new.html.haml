@@ -1,0 +1,7 @@
+%ul.breadcrumb
+  %li= link_to 'Счетчики', counters_path
+  %li Новый счетчик
+
+%h3 Новый счетчик
+%br
+= render partial: 'form', locals: {form_action: counters_path(@item)}

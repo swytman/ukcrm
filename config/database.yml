@@ -1,0 +1,8 @@
+# все на проде
+development:
+  adapter: postgresql
+  database: ukcrm
+  pool: 5
+  host: localhost
+  username: stepanov
+  timeout: 5000

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Rails ukcrm: staging" uuid="124a33a0-9888-49db-bcad-4390661e231c">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails ukcrm: roza" uuid="60884c2f-e6d8-438e-9c92-b3d27ff9778e">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails ukcrm: development" uuid="88c980ba-a103-4825-b175-1d58ce0095da">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails ukcrm: test" uuid="f82d28be-78db-4881-931e-dbd02332b0ba">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails ukcrm: pt_backend" uuid="735cddc7-3788-4096-b4c7-36d50a84daa6">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails ukcrm: production" uuid="93759a67-ac32-42a6-8129-359c8e16e64e">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+</component>
