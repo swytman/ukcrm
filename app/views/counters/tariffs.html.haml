@@ -3,3 +3,27 @@
   %li= @item.title
 
 = render 'tabs'
+
+.row
+  .col-md-10.col-lg-10.col-xs-7
+    %h3 Тарифы счетчика
+  .col-sm-2.pull-right.top20
+    = link_to "Добавить", new_tariff_path(counter_code: @item.code), class: "btn btn-primary btn-sm"
+.row
+  .col-sm-12
+    - if @tariffs.to_a.size > 0
+      %table.table.table-stripped.table-hover
+        %thead
+          %tr
+            %th #
+            %th.col-sm-4 Месяц
+            %th.col-sm-4 Значение
+        %tbody
+          - @tariffs.each_with_index do |item, index|
+            %tr
+              %td= index+1
+              %td= link_to item.date, edit_tariff_path(item)
+              %td= link_to item.rate, edit_tariff_path(item)
+
+    - else
+      %p Нет тарифов

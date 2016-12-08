@@ -1,7 +1,8 @@
 %ul.breadcrumb
   %li= link_to 'Счетчики', counters_path
-  %li Новый счетчик
+  %li= link_to @item.counter.title, tariffs_counter_path(@item.counter)
+  %li Добавить тариф
 
-%h3 Новый счетчик
+%h3 Добавить тариф
 %br
-= render partial: 'form', locals: {form_action: counters_path(@item)}
+= render partial: 'form', locals: {form_action: tariffs_path(@item)}

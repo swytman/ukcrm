@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20160929161007) do
     t.float   "rate"
     t.integer "month"
     t.integer "year"
-    t.integer "counter_code"
+    t.string  "counter_code"
   end
 
 end

@@ -1,8 +1,8 @@
-class MeteringsController < ApplicationController
+class TariffsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = Metering.all
+    @items = Tariff.all
   end
 
   def show
@@ -14,21 +14,22 @@ class MeteringsController < ApplicationController
   end
 
   def new
-    @item = Metering.new
+    code = params[:counter_code] if params[:counter_code].present?
+    @item = Tariff.new(counter_code: code)
   end
 
   def update
     if @item.update(item_params)
-      redirect_to edit_metering_path(@item), notice: 'Изменения сохранены'
+      redirect_to tariffs_counter_path(@item.counter), notice: 'Изменения сохранены'
     else
-      render "meterings/edit"
+      render "tariffs/edit"
     end
   end
 
   def create
-    item = Metering.new(item_params)
+    item = Tariff.new(item_params)
     if item.save
-      redirect_to meterings_path, notice: 'Создано'
+      redirect_to tariffs_counter_path(item.counter), notice: 'Создано'
     else
       render :edit, notice: 'Ошибка'
     end
@@ -36,21 +37,21 @@ class MeteringsController < ApplicationController
 
   def destroy
     if @item.destroy
-      redirect_to meterings_path, notice: 'Удалено'
+      redirect_to tariffs_counter_path(@item.counter), notice: 'Удалено'
     else
-      redirect_to meterings_path, notice: 'Ошибка при удалении'
+      redirect_to tariffs_counter_path(@item.counter), notice: 'Ошибка при удалении'
     end
   end
 
   private
 
   def item_params
-    params[:metering][:rate] = params[:metering][:rate].gsub(',', '.') if params[:metering][:rate]
+    params[:tariff][:rate] = params[:tariff][:rate].gsub(',', '.') if params[:tariff][:rate]
 
-    params[:metering].permit(:title, :code, :rate)
+    params[:tariff].permit(:year, :month, :rate, :counter_code)
   end
 
   def set_item
-    @item = Metering.find(params[:id])
+    @item = Tariff.find(params[:id])
   end
 end

@@ -19,7 +19,8 @@
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://127.0.0.1/ukcrm</jdbc-url>
-      <user-name>stepanov</user-name>
+      <user-name>ukcrm</user-name>
+      <user-password>df9bdf98df99df9bdf98df99df9bdf98df99</user-password>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="Rails ukcrm: test" uuid="f82d28be-78db-4881-931e-dbd02332b0ba">

@@ -10,7 +10,7 @@ class CreateCounter < ActiveRecord::Migration
       t.float 'rate'
       t.integer 'month'
       t.integer 'year'
-      t.integer 'counter_code'
+      t.string 'counter_code'
     end
 
     create_table :meterings do |t|

@@ -44,7 +44,7 @@ class CountersController < ApplicationController
   end
 
   def tariffs
-
+    @tariffs = Tariff.by_code(@item.code)
   end
 
   private

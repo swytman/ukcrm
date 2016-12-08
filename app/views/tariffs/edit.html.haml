@@ -1,9 +1,8 @@
 %ul.breadcrumb
   %li= link_to 'Счетчики', counters_path
-  %li= @item.title
-
-= render 'tabs'
+  %li= link_to @item.counter.title, tariffs_counter_path(@item.counter)
+  %li Редактировать
 
 %h3 Редактировать
 %br
-= render partial: 'form', locals: {form_action: counter_path(@item)}
+= render partial: 'form', locals: {form_action: tariff_path(@item)}

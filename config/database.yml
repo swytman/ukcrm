@@ -4,5 +4,6 @@ development:
   database: ukcrm
   pool: 5
   host: localhost
-  username: stepanov
+  username: ukcrm
+  password: 123123123
   timeout: 5000
