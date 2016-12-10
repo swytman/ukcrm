@@ -1,0 +1,7 @@
+%ul.breadcrumb
+  %li= link_to 'Показания', meterings_path(code: @item.code)
+  %li= @item.date
+
+%h3 Редактировать
+%br
+= render partial: 'form', locals: {form_action: metering_path(@item)}

@@ -1,0 +1,37 @@
+.row
+  .col-md-12
+    %h3 Показания
+
+.row.top20
+  .col-sm-12
+    - Counter.all.each do |c|
+      - klass = 'btn-default'
+      - klass = 'btn-primary' if @code == c.code
+      = link_to c.title, meterings_path(code: c.code), class: "btn #{klass} btn-sm"
+
+.row
+  .col-sm-12
+    - if @items.any?
+      %table.table.table-stripped.table-hover
+        %thead
+          %tr
+            %th #
+            %th.col-sm-3 Дата
+            %th.col-sm-3 Показание
+            %th.col-sm-3 Тариф
+            %th.col-sm-3 Итого
+        %tbody
+          - @items.each_with_index do |item, index|
+            %tr
+              %td= index+1
+              %td= link_to item.date, metering_path(item.id)
+              %td= link_to item.value
+              %td= item.tariff.full_title
+              %td= item.total
+
+    - else
+      %p Нет показаний
+
+.row
+  .col-sm-12.top20
+    = link_to "Добавить", new_metering_path(code: @code), class: "btn btn-success btn-sm"

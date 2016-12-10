@@ -1,0 +1,30 @@
+= form_for @item, url: form_action, html: {class: 'form form-horizontal'} do |f|
+  .form-group
+    .col-sm-3
+      %label Месяц
+    .col-sm-9
+      = f.select :month, Common::MONTHS.map{|c| [c, c]}, { class: 'form-control'}
+  .form-group
+    .col-sm-3
+      %label Год
+    .col-sm-9
+      = f.select :year, (Time.now.year...Time.now.year+2).map{|c| [c, c]}, { class: 'form-control'}
+  .form-group
+    .col-sm-3
+      %label Тариф
+    .col-sm-9
+      = f.select :tariff_id, Tariff.by_code(@item.code).map{|c| [c.date, c.id]}, { class: 'form-control'}
+
+  .form-group
+    .col-sm-3
+      %label Значение
+    .col-sm-2
+      = f.text_field :value, class: 'form-control'
+
+
+  .form-group
+    .col-sm-12
+      = f.submit 'Сохранить', class: 'btn btn-success'
+      %a.btn.btn-default{href: request.referer} Отмена
+      - unless @item.new_record?
+        = link_to 'Удалить', metering_path(@item), method: :delete, class: 'btn btn-danger pull-right', confirm: 'Подтвердите удаление'

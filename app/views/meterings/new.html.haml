@@ -1,0 +1,7 @@
+%ul.breadcrumb
+  %li= link_to 'Показания', meterings_path
+  %li Добавить
+
+%h3 Новое показание
+%br
+= render partial: 'form', locals: {form_action: meterings_path(@item)}
