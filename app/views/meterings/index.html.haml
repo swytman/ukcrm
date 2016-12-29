@@ -46,7 +46,7 @@
   - items.each_with_index do |item, i|
     - labels << item.date
     - if i > 0
-      - diff = items[i].value||0 - items[i-1].value||0
+      - diff = items[i].value - items[i-1].value
     - else
       - diff = items[i].value
     - values << diff

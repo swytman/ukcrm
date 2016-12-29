@@ -2,6 +2,8 @@ class Metering < ActiveRecord::Base
   belongs_to :tariff
   has_one :counter, through: :tariff
 
+  validates :value, presence: true
+
   def self.by_code(code)
     joins(:tariff).where(tariffs: {counter_code: code}).order('year DESC, month DESC')
   end

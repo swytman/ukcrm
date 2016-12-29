@@ -48,6 +48,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano3-unicorn'
   gem 'capistrano-rvm'
+  gem 'better_errors'
 end
 
 
