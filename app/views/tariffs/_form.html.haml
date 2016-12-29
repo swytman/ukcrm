@@ -8,7 +8,7 @@
     .col-sm-3
       %label Год
     .col-sm-9
-      = f.select :year, (Time.now.year...Time.now.year+2).map{|c| [c, c]}, { class: 'form-control'}
+      = f.select :year, (Time.now.year...Time.now.year+4).map{|c| [c, c]}, { class: 'form-control'}
   .form-group
     .col-sm-3
       %label Счетчик
