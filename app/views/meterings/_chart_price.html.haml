@@ -1,0 +1,25 @@
+%h3 Всего потрачено
+%canvas#chart_prirce{width: 400, height: 200}
+
+:javascript
+  var ctx_price = $("#chart_prirce");
+
+  var myChart = new Chart(ctx_price, {
+      type: 'line',
+      data: {
+          labels: #{labels},
+          datasets: [{
+              label: "#{title}",
+              data: #{values},
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          }
+      }
+  });

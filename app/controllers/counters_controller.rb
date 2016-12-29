@@ -50,9 +50,7 @@ class CountersController < ApplicationController
   private
 
   def item_params
-    params[:counter][:rate] = params[:counter][:rate].gsub(',', '.') if params[:counter][:rate]
-
-    params[:counter].permit(:title, :code, :rate)
+    params[:counter].permit(:title, :code, :unit )
   end
 
   def set_item

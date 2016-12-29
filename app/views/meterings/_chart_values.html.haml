@@ -1,0 +1,29 @@
+%h3 График потребления
+%canvas#chart_values{width: 400, height: 200}
+
+:javascript
+  var ctx_values = $("#chart_values");
+
+  var myChart = new Chart(ctx_values, {
+      type: 'bar',
+      data: {
+          labels: #{labels},
+          datasets: [{
+              label: "#{title}",
+              data: #{values},
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+
+              borderColor: 'rgba(255,99,132,1)',
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          }
+      }
+  });

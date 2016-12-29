@@ -25,7 +25,7 @@
             %tr
               %td= index+1
               %td= link_to item.date, metering_path(item.id)
-              %td= link_to item.value
+              %td= link_to item.value, metering_path(item.id)
               %td= item.tariff.full_title
               %td= item.total
 
@@ -35,3 +35,24 @@
 .row
   .col-sm-12.top20
     = link_to "Добавить", new_metering_path(code: @code), class: "btn btn-success btn-sm"
+
+- if @code
+  - labels = []
+  - values = []
+  - values_rub = []
+  - items = @items.reverse.to_a
+  - counter = Counter.find_by(code: @code)
+  - title = "#{counter.title}, #{counter.unit}"
+  - items.each_with_index do |item, i|
+    - labels << item.date
+    - if i > 0
+      - diff = items[i].value - items[i-1].value
+    - else
+      - diff = items[i].value
+    - values << diff
+    - values_rub << item.total
+
+  = render partial: 'chart_values', locals: {title: title, labels: labels, values: values }
+
+  - title = "Итого, руб."
+  = render partial: 'chart_price', locals: {title: title, labels: labels, values: values_rub }

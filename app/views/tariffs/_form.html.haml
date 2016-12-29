@@ -3,7 +3,7 @@
     .col-sm-3
       %label Месяц
     .col-sm-9
-      = f.select :month, Common::MONTHS.map{|c| [c, c]}, { class: 'form-control'}
+      = f.select :month, options_for_select(Common::MONTHS, @item.month), { class: 'form-control'}
   .form-group
     .col-sm-3
       %label Год
