@@ -15,7 +15,9 @@ class Metering < ActiveRecord::Base
   end
 
   def total
-    value * tariff.rate
+    res = 0
+    res = value * tariff.rate if value && tariff.rate
+    res
   end
 
 end

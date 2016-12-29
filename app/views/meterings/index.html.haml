@@ -27,7 +27,7 @@
               %td= link_to item.date, metering_path(item.id)
               %td= link_to item.value, metering_path(item.id)
               %td= item.tariff.full_title
-              %td= item.total
+              %td= item.total.round(2)
 
     - else
       %p Нет показаний
@@ -46,7 +46,7 @@
   - items.each_with_index do |item, i|
     - labels << item.date
     - if i > 0
-      - diff = items[i].value - items[i-1].value
+      - diff = items[i].value||0 - items[i-1].value||0
     - else
       - diff = items[i].value
     - values << diff

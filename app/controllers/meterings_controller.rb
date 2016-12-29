@@ -20,6 +20,12 @@ class MeteringsController < ApplicationController
     def new
       @code = params[:code] if params[:code]
       @item = Metering.new(tariff_id: Tariff.current(@code).try(:id))
+      last = Metering.last
+      if last
+        @item.year = last.year
+        @item.month = last.month
+      end
+
     end
 
     def update
