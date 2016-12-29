@@ -68,19 +68,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_form.html.haml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_form.html.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/tariffs/_form.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="56" selection-start="356" selection-end="356" vertical-scroll-proportion="0.23076923" vertical-offset="0" max-vertical-offset="650">
+            <state line="19" column="21" selection-start="612" selection-end="612" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="540">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_form.html.haml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="_form.html.haml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/meterings/_form.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="56" selection-start="356" selection-end="356" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="540">
+            <state line="10" column="58" selection-start="358" selection-end="358" vertical-scroll-proportion="0.23076923" vertical-offset="0" max-vertical-offset="650">
               <folding />
             </state>
           </provider>
@@ -169,9 +169,9 @@
         <option value="$PROJECT_DIR$/config/unicorn/production.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/Capfile" />
-        <option value="$PROJECT_DIR$/app/views/meterings/_form.html.haml" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/app/views/tariffs/_form.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/meterings/_form.html.haml" />
       </list>
     </option>
   </component>
@@ -935,13 +935,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/meterings/_form.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="56" selection-start="356" selection-end="356" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="540">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/counters/tariffs.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -951,7 +944,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/tariffs/_form.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="56" selection-start="356" selection-end="356" vertical-scroll-proportion="0.23076923" vertical-offset="0" max-vertical-offset="650">
+        <state line="19" column="21" selection-start="612" selection-end="612" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="540">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/meterings/_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="58" selection-start="358" selection-end="358" vertical-scroll-proportion="0.23076923" vertical-offset="0" max-vertical-offset="650">
           <folding />
         </state>
       </provider>
