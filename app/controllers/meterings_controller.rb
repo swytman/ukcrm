@@ -1,5 +1,5 @@
 class MeteringsController < ApplicationController
-
+    before_filter :authenticate_user!
     before_action :set_item, only: [:show, :edit, :update, :destroy, :tariffs]
 
     def index
