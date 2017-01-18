@@ -1,0 +1,26 @@
+%ul.nav.navbar-nav.navbar-right.right50
+  - if user_signed_in?
+    %li{style: 'min-width: 167px'}
+      %a{href: '#'}
+        = current_user.full_name_with_email
+    %li
+
+      %a.dropdown-toggle{ href: '#', data: { toggle: 'dropdown' } }
+        %span.glyphicon.glyphicon-user
+        %span.caret
+      %ul.dropdown-menu
+        -#%li
+        -#  %a{ href: personal_profile_path }
+        -#    %span.glyphicon.glyphicon-tower
+        -#    Настройки пользователя
+        %li= link_to '<span class="hidden-user glyphicon glyphicon-log-out"></span> Выход'.html_safe, destroy_user_session_path, method: :delete
+
+  - else
+    %li= link_to '<span class="hidden-user glyphicon glyphicon-log-in"></span> Вход'.html_safe, new_session_path(User)
+
+
+
+:coffee
+  $ ->
+    $('#current_user_id').change (e) ->
+      window.location.href =  location.protocol + '//' + location.host + location.pathname + "?current_user_id="  + $(this).val();

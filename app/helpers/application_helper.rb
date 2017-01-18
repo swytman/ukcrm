@@ -13,4 +13,13 @@ module ApplicationHelper
     end
   end
 
+  def page_title(page_title)
+    base_title = "TravelStack"
+    if page_title.empty?
+      content_for(:title, base_title)
+    else
+      content_for(:title, "#{base_title} | #{page_title}")
+    end
+  end
+
 end

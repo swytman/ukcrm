@@ -7,16 +7,19 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{:href => root_path} Учет
+      %a.navbar-brand{:href => root_path} Myvillage.online
     / Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li
-          %a{:href => counters_path}
-            Счетчики
-            %span.sr-only (current)
-        %li
-          %a{:href => meterings_path}
-            Показания
+        - if current_user
+          %li
+            %a{:href => counters_path}
+              Счетчики
+              %span.sr-only (current)
+          %li
+            %a{:href => meterings_path}
+              Показания
+
+      = render partial: 'shared/user'
 
 
