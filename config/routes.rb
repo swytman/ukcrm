@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   resources :meterings
   resources :tariffs
 
+  resources :groups
+  resources :users
+
 end

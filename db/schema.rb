@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118160657) do
+ActiveRecord::Schema.define(version: 20170125153814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,21 @@ ActiveRecord::Schema.define(version: 20170118160657) do
     t.string "color"
     t.string "unit",              default: ""
     t.string "organization_code"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "key",   limit: 255
+    t.string "title", limit: 255
+  end
+
+  create_table "groups_roles", id: false, force: :cascade do |t|
+    t.integer "group_id", null: false
+    t.integer "role_id",  null: false
+  end
+
+  create_table "groups_users", id: false, force: :cascade do |t|
+    t.integer "user_id",  null: false
+    t.integer "group_id", null: false
   end
 
   create_table "meterings", force: :cascade do |t|
@@ -36,6 +51,17 @@ ActiveRecord::Schema.define(version: 20170118160657) do
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "title",      limit: 255, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "role_id", null: false
   end
 
   create_table "tariffs", force: :cascade do |t|

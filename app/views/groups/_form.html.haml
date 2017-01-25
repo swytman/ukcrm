@@ -1,0 +1,27 @@
+= form_for @group, html: {role: 'form', class: 'form-horizontal'} do |f|
+
+  = render partial: 'shared/messages', locals: {target: @group}
+
+  %ul.nav.nav-tabs.active#tabs
+    %li
+      %a{href: "#base", 'data-target'=>"#base", 'data-toggle' => "tab"} Общая
+
+  .tab-content
+    .panel.tab-pane#base
+      .form-group
+        %label.control-label.col-sm-3 Название
+        .col-sm-5
+          = f.text_field :title, class: 'form-control'
+      .form-group
+        %label.control-label.col-sm-3 Роли
+        .col-sm-5
+          = f.collection_select :role_ids, Role.all.to_a, :id, :translated_title, {selected: @group.role_ids}, {class: 'form-control', multiple: true}
+      .form-group
+        %label.control-label.col-sm-3 Пользователи
+        .col-sm-5
+          = f.collection_select :user_ids, User.all.to_a, :id, :full_name, {selected: @group.user_ids}, {class: 'form-control displaynone', multiple: true}
+
+
+  .form-group
+    .col-sm-3
+      = f.submit 'Сохранить', class: 'btn btn-success btn-lg'

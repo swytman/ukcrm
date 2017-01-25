@@ -1,0 +1,17 @@
+- page_title("Администрирование | Управление группами")
+
+%h1
+  = link_to 'Добавить группу', new_group_path, class: 'btn btn-primary pull-right'
+  Управление группами
+%br
+
+%table.table.table-stripped.table-hover.table-condenced
+  %thead
+    %tr
+      %th.col-sm-1 id
+      %th Название
+  %tbody
+    - @groups.each do |group|
+      %tr
+        %td= group.id
+        %td= link_to group.pretty_title, edit_group_path(group)

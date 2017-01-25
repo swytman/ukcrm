@@ -1,0 +1,22 @@
+/* Нужно для корректной работы chosen с display:none*/
+
+#filter-panel .chosen-container
+{
+  width: 100% !important;
+}
+
+.widthIE .chosen-container
+{
+  width: 100% !important;
+}
+
+
+
+.tab-content #base, .tab-content #regions{
+  padding-top: 20px ;
+  .chosen-container
+  {
+    width: 100% !important;
+  }
+}
+
