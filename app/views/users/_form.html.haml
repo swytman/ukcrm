@@ -1,0 +1,26 @@
+= form_for @item, url: form_action, html: {class: 'form form-horizontal'} do |f|
+  .form-group
+    .col-sm-3
+      %label ФИО
+    .col-sm-9
+      = f.text_field :title, class: 'form-control',  :autofocus => true
+
+  .form-group
+    .col-sm-3
+      %label Email
+    .col-sm-9
+      = f.text_field :email, class: 'form-control'
+
+  .form-group
+    .col-sm-3
+      %label Поселок
+    .col-sm-9
+      = f.select :village_code, Village.all.map{|c| [c.title, c.code]}, {include_blank: true}, { class: 'chosen-select'}
+
+
+  .form-group
+    .col-sm-12
+      = f.submit 'Сохранить', class: 'btn btn-success'
+      %a.btn.btn-default{href: request.referer} Отмена
+      - unless @item.new_record?
+        = link_to 'Удалить', user_path(@item), method: :delete, class: 'btn btn-danger pull-right', confirm: 'Подтвердите удаление'

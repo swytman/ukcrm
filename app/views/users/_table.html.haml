@@ -1,0 +1,18 @@
+.row
+  .col-sm-12
+    - if items.any?
+      %table.table.table-stripped.table-hover
+        %thead
+          %tr
+            %th #
+            %th.col-sm-9 Название
+            %th.col-sm-3 Код
+        %tbody
+          - items.each_with_index do |item, index|
+            %tr
+              %td= index+1
+              %td= link_to item.title, user_path(item.id)
+              %td= item.village_code
+
+    - else
+      %p Нет пользователей

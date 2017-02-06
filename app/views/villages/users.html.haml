@@ -1,0 +1,9 @@
+= render 'tabs'
+
+.row
+  .col-md-10.col-lg-10.col-xs-7
+    %h3 Пользователи
+  .col-sm-2.pull-right.top20
+    = link_to "Создать", new_user_path(village_code: @item.code), class: "btn btn-primary btn-sm"
+
+= render :partial => 'users/table', locals: {items: @items}

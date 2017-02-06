@@ -1,0 +1,7 @@
+%ul.breadcrumb
+  %li= link_to 'Пользователи', users_path
+  %li Добавить пользователя
+
+%h3 Добавить пользователя
+%br
+= render partial: 'form', locals: {form_action: users_path(@item)}

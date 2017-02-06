@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :validatable,
          :recoverable, :rememberable, :trackable
 
+  has_and_belongs_to_many :roles
+  has_and_belongs_to_many :groups
+  belongs_to :village, class_name: 'Village', primary_key: 'code', foreign_key: 'village_code'
+
   def full_name_with_email
     if full_name.present? && email.present?
       "#{full_name} (#{email})"

@@ -1,0 +1,10 @@
+%ul.breadcrumb
+  %li= link_to 'Организация', villages_path
+  %li= link_to @item.title, village_path(@item)
+  %li Редактировать
+
+= render 'tabs'
+
+%h3 Редактировать
+%br
+= render partial: 'form', locals: {form_action: village_path(@item)}

@@ -1,5 +1,6 @@
 class Tariff < ActiveRecord::Base
   belongs_to :counter, class_name: 'Counter', primary_key: 'code', foreign_key: 'counter_code'
+  belongs_to :village, class_name: 'Village', primary_key: 'code', foreign_key: 'village_code'
 
   validates :rate, presence: true
 

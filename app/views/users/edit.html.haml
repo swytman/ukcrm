@@ -1,0 +1,8 @@
+%ul.breadcrumb
+  %li= link_to 'Пользователь', users_path
+  %li= link_to @item.title, user_path(@item)
+  %li Редактировать
+
+%h3 Редактировать
+%br
+= render partial: 'form', locals: {form_action: user_path(@item)}

@@ -1,0 +1,7 @@
+%ul.breadcrumb
+  %li= link_to 'Организации', villages_path
+  %li Добавить организацию
+
+%h3 Добавить организацию
+%br
+= render partial: 'form', locals: {form_action: villages_path(@item)}

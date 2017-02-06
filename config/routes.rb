@@ -14,5 +14,11 @@ Rails.application.routes.draw do
 
   resources :groups
   resources :users
+  resources :villages do
+    member do
+      get :users
+    end
+  end
+
 
 end

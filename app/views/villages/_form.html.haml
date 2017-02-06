@@ -1,0 +1,19 @@
+= form_for @item, url: form_action, html: {class: 'form form-horizontal'} do |f|
+  .form-group
+    .col-sm-3
+      %label Название
+    .col-sm-9
+      = f.text_field :title, class: 'form-control',  :autofocus=>true
+  .form-group
+    .col-sm-3
+      %label Код
+    .col-sm-9
+      = f.text_field :code, class: 'form-control'
+
+
+  .form-group
+    .col-sm-12
+      = f.submit 'Сохранить', class: 'btn btn-success'
+      %a.btn.btn-default{href: request.referer} Отмена
+      - unless @item.new_record?
+        = link_to 'Удалить', village_path(@item), method: :delete, class: 'btn btn-danger pull-right', confirm: 'Подтвердите удаление'

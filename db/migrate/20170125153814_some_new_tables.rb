@@ -27,6 +27,8 @@ class SomeNewTables < ActiveRecord::Migration
       t.integer "role_id",  null: false
     end
 
+    Rake::Task['users:create_roles'].invoke
     Rake::Task['users:create_groups'].invoke
+    Rake::Task['users:create_admin'].invoke
   end
 end
