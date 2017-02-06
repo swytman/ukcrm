@@ -4,3 +4,6 @@ $(document).ready ->
     $(this).tab('show')
   # переключаемся на вкладку общие
   $('#tabs a[href="#base"]').tab('show')
+
+
+  $('.form-horizontal select').chosen()
