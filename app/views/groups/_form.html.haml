@@ -1,13 +1,15 @@
 = form_for @group, html: {role: 'form', class: 'form-horizontal'} do |f|
 
-  = render partial: 'shared/messages', locals: {target: @group}
-
   %ul.nav.nav-tabs.active#tabs
     %li
       %a{href: "#base", 'data-target'=>"#base", 'data-toggle' => "tab"} Общая
 
   .tab-content
     .panel.tab-pane#base
+      .form-group
+        %label.control-label.col-sm-3 Ключ
+        .col-sm-5
+          = f.text_field :key, class: 'form-control'
       .form-group
         %label.control-label.col-sm-3 Название
         .col-sm-5

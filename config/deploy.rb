@@ -7,7 +7,7 @@ set :deploy_to, '/var/www/ukcrm'
 set :current_path,  "#{fetch(:deploy_to)}/current"
 set :unicorn_conf, "#{fetch(:deploy_to)}/conccurrent/config/unicorn/#{fetch(:stage)}.rb"
 set :unicorn_pid, "#{fetch(:deploy_to)}/shared/pids/unicorn.pid"
-set :linked_files, %w{config/secrets.yml config/database.yml}
+set :linked_files, %w{config/secrets.yml config/database.yml config/mail.yml}
 set :linked_dirs, %w{public/system}
 
 # UNICORN

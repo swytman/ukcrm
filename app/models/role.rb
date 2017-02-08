@@ -4,6 +4,9 @@ class Role < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_and_belongs_to_many :groups
 
+  validates :title, uniqueness: true
+  validates :title, uniqueness: true
+
   def translated_title
     I18n.t("wrappers.Role.title.#{title}")
   end

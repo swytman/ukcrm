@@ -76,4 +76,23 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.raise_delivery_errors = true
+  config.app_domain = 'myvillage.online'
+
+  MAIL = YAML::load_file("#{Rails.root}/config/mail.yml")['gmail']
+  config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { host: config.app_domain }
+  config.action_mailer.smtp_settings = {
+      address: 'smtp.gmail.com',
+      port: 587,
+      user_name: MAIL['user'],
+      password: MAIL['password'],
+      authentication: :plain,
+      domain: 'gmail.com',
+      openssl_verify_mode: 'none'
+  }
+
+
 end

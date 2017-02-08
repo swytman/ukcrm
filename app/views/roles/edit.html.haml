@@ -1,0 +1,12 @@
+- page_title("Администрирование | Группа #{@item.title}")
+
+%ul.breadcrumb
+  %li= link_to 'Управление ролями', roles_path
+  %li #{@item.title}
+
+.row.h2.bottom20.top20
+  .col-sm-9.col-sm Роль: #{@item.title}
+  .col-sm-3.col-sm
+    = link_to 'Удалить', role_path(@item), method: :delete, class: 'btn btn-danger pull-right', data: {confirm: 'Удалить роль'}
+
+= render partial: 'form'

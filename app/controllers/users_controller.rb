@@ -30,11 +30,9 @@ class UsersController < ApplicationController
 
   def create
     @item = User.new(item_params)
-    generated_password = Devise.friendly_token.first(8)
-    @item.password = generated_password
-
-    # RegistrationMailer.welcome(user, generated_password).deliver
-    if @item.save!
+    # generated_password = Devise.friendly_token.first(8)
+    # @item.password = generated_password
+    if @item.save(validate: false)
       redirect_to users_village_path(@item.village), notice: 'Создано'
     else
       render :new, notice: 'Ошибка'

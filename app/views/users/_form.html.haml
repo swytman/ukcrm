@@ -17,6 +17,15 @@
     .col-sm-9
       = f.select :village_code, Village.all.map{|c| [c.title, c.code]}, {include_blank: true}, { class: 'chosen-select'}
 
+  .form-group
+    %label.col-sm-3 Роли
+    .col-sm-5
+      = f.collection_select :role_ids, Role.all.to_a, :id, :translated_title, {selected: @item.role_ids}, {class: 'form-control', multiple: true}
+  .form-group
+    %label.col-sm-3 Группы
+    .col-sm-5
+      = f.collection_select :group_ids, Group.all.to_a, :id, :title, {selected: @item.group_ids}, {class: 'form-control displaynone', multiple: true}
+
 
   .form-group
     .col-sm-12

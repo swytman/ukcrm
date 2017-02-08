@@ -1,0 +1,17 @@
+- page_title("Администрирование | Управление ролями")
+
+%h1
+  = link_to 'Добавить', new_role_path, class: 'btn btn-primary pull-right'
+  Управление ролями
+%br
+
+%table.table.table-stripped.table-hover.table-condenced
+  %thead
+    %tr
+      %th.col-sm-1 id
+      %th Название
+  %tbody
+    - @items.each do |role|
+      %tr
+        %td= role.id
+        %td= link_to role.title, edit_role_path(role)

@@ -1,0 +1,8 @@
+ru:
+  wrappers:
+    Role:
+      title:
+        administrator: Админ
+        manager: Управляющий
+        settler: Житель
+

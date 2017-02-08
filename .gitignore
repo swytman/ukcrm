@@ -17,3 +17,4 @@
 /tmp
 /.idea/workspace.xml
 .idea/
+/config/mail.yml
