@@ -1,0 +1,13 @@
+.panel-heading.auth-title
+  Неверная ссылка для регистрации
+.panel-body
+  = form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { class: 'form-horizontal', role: 'form', :method => :post }) do |f|
+    -#= devise_error_messages!
+    .form-group
+      .col-sm-12
+        = f.email_field :email, :autofocus => true, class: 'form-control', placeholder: 'Email'
+
+    .form-group
+      .col-sm-12
+        %button.btn.btn-primary
+          Получить инструкцию по восстановлению доступа

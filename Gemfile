@@ -51,6 +51,7 @@ group :development do
   gem 'capistrano3-unicorn'
   gem 'capistrano-rvm'
   gem 'better_errors'
+  gem 'erb2haml'
 end
 
 
