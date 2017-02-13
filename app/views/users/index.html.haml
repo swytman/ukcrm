@@ -2,6 +2,6 @@
   .col-md-10.col-lg-10.col-xs-7
     %h3 Пользователи
   .col-sm-2.pull-right.top20
-    = link_to "Создать", new_user_path, class: "btn btn-primary btn-sm"
+    = link_to "Создать", new_user_path, class: "btn btn-primary btn-sm pull-right"
 
 = render :partial => 'table', locals: {items: @items}

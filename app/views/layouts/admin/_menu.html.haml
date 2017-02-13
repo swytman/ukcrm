@@ -1,0 +1,27 @@
+#bs-example-navbar-collapse-1.collapse.navbar-collapse
+  %ul.nav.navbar-nav
+    - if current_user
+      %li
+        %a{:href => counters_path}
+          Счетчики
+          %span.sr-only (current)
+      %li
+        %a{:href => meterings_path}
+          Показания
+      %li
+        %a{:href => groups_path}
+          Группы
+      %li
+        %a{:href => roles_path}
+          Роли
+      %li
+        %a{:href => villages_path}
+          Организации
+      %li
+        %a{:href => users_path}
+          Пользователи
+
+
+
+  = render partial: 'shared/user'
+

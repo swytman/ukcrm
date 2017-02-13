@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
 
   # after_create :welcome_message
 
+  def users
+    return User.all if is?(:administrator)
+    return village.users if is?(:manager)
+  end
+
   def full_name_with_email
     if full_name.present? && email.present?
       "#{full_name} (#{email})"

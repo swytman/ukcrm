@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy, :users]
 
   def index
-    @items = User.all
+    @items = current_user.users
   end
 
   def show
