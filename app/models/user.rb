@@ -4,9 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :validatable,
          :recoverable, :rememberable, :trackable, :confirmable
 
+  # virtual attribute to skip password validation while saving
+  attr_accessor :skip_password_validation
   has_and_belongs_to_many :roles
   has_and_belongs_to_many :groups
   belongs_to :village, class_name: 'Village', primary_key: 'code', foreign_key: 'village_code'
+
+  validates :village_code, presence: true, if: Proc.new{ |a| a.is?(:settler) }
 
   # after_create :welcome_message
 
@@ -68,7 +72,13 @@ class User < ActiveRecord::Base
     pending_any_confirmation {yield}
   end
 
-  private
+  protected
+
+  def password_required?
+    return false if skip_password_validation
+    super
+  end
+
 
   def welcome_message
     UserMailer.welcome_message(self).deliver

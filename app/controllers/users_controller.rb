@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy, :users]
 
   def index
-    @items = current_user.users
+    @items = current_user.users || []
   end
 
   def show
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     if @item.update(item_params)
       redirect_to edit_user_path(@item), notice: 'Изменения сохранены'
     else
-      render "users/edit"
+      render 'edit'
     end
   end
 
@@ -32,10 +32,13 @@ class UsersController < ApplicationController
     @item = User.new(item_params)
     # generated_password = Devise.friendly_token.first(8)
     # @item.password = generated_password
-    if @item.save(validate: false)
-      redirect_to users_village_path(@item.village), notice: 'Создано'
+
+    @item.skip_password_validation = true
+
+    if @item.save
+      redirect_to users_path, notice: 'Создано'
     else
-      render :new, notice: 'Ошибка'
+      render :new
     end
   end
 
@@ -54,7 +57,8 @@ class UsersController < ApplicationController
   private
 
   def item_params
-    params[:user].permit(:title, :village_code, :email )
+    params[:user][:role_ids] = params[:user][:role_ids].reject(&:blank?).map(&:to_i)
+    params[:user].permit(:title, :village_code, :email, :group_ids => [], :role_ids => [])
   end
 
   def set_item

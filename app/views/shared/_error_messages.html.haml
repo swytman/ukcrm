@@ -1,0 +1,6 @@
+- if target.errors.any?
+  .bs-callout.bs-callout-error
+    %h4=t( 'errors.template.header', :count => target.errors.count )
+    %ul
+      - target.errors.full_messages.each do |msg|
+        %li= msg

@@ -9,6 +9,12 @@
         %span.icon-bar
       %a.navbar-brand{:href => root_path} MyVillage.online
     / Collect the nav links, forms, and other content for toggling
-    - if current_user.is?(:administrator)
-      = render 'layouts/admin/menu'
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      - if current_user.is?(:administrator)
+        = render 'layouts/admin/menu'
+      - elsif current_user.is?(:manager)
+        = render 'layouts/manager/menu'
+      - elsif current_user.is?(:settler)
+        = render 'layouts/settler/menu'
+      = render 'shared/user'
 
