@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_item, only: [:show, :edit, :update, :destroy, :users]
+  before_action :set_redirect_path, only: [:new, :show, :edit, :update, :create, :destroy]
 
   def index
     @items = current_user.users || []
@@ -16,12 +17,12 @@ class UsersController < ApplicationController
 
   def new
     @item = User.new
-    @item.village_code = params[:village_code] if params[:village_code].present?
+    @item.village_code = Village.find_by(id: params[:village_id]).code if params[:village_id].present?
   end
 
   def update
     if @item.update(item_params)
-      redirect_to edit_user_path(@item), notice: 'Изменения сохранены'
+      redirect_to @redirect_path || edit_user_path(@item), notice: 'Изменения сохранены'
     else
       render 'edit'
     end
@@ -32,11 +33,10 @@ class UsersController < ApplicationController
     @item = User.new(item_params)
     # generated_password = Devise.friendly_token.first(8)
     # @item.password = generated_password
-
     @item.skip_password_validation = true
 
     if @item.save
-      redirect_to users_path, notice: 'Создано'
+      redirect_to @redirect_path || users_path, notice: 'Создано'
     else
       render :new
     end
@@ -44,9 +44,9 @@ class UsersController < ApplicationController
 
   def destroy
     if @item.destroy
-      redirect_to users_path, notice: 'Удалено'
+      redirect_to @redirect_path || users_path, notice: 'Удалено'
     else
-      redirect_to users_path, notice: 'Ошибка при удалении'
+      redirect_to @redirect_path || users_path, notice: 'Ошибка при удалении'
     end
   end
 
@@ -63,6 +63,18 @@ class UsersController < ApplicationController
 
   def set_item
     @item = User.find(params[:id])
+  end
+
+  def set_redirect_path
+    if params[:village_id]
+      @redirect_path = users_village_path(params[:village_id])
+      @village_id = params[:village_id]
+    end
+
+    if params[:redirect_path]
+      @redirect_path = params[:redirect_path]
+    end
+
   end
 
 end

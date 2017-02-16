@@ -1,0 +1,4 @@
+%ul.breadcrumb
+  %li= link_to 'Пользователи', @redirect_path || users_path
+  - unless @item.new_record?
+    %li= link_to @item.title, edit_user_path(@item, village_id: @village_id)

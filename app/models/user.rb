@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_and_belongs_to_many :groups
   belongs_to :village, class_name: 'Village', primary_key: 'code', foreign_key: 'village_code'
+  has_many :meterings, inverse_of: :user
 
   validates :village_code, presence: true, if: Proc.new{ |a| a.is?(:settler) }
 

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :villages do
     member do
       get :users
+      get :counters
     end
   end
 

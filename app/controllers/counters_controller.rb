@@ -3,7 +3,7 @@ class CountersController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy, :tariffs]
 
   def index
-    @items = Counter.all
+    @items = @village.counters
   end
 
   def show
@@ -15,7 +15,7 @@ class CountersController < ApplicationController
   end
 
   def new
-    @item = Counter.new
+    @item = Counter.new(village_code: params[:village_code])
   end
 
   def update
@@ -27,19 +27,19 @@ class CountersController < ApplicationController
   end
 
   def create
-    item = Counter.new(item_params)
-    if item.save
-      redirect_to counters_path, notice: 'Создано'
+    @item = Counter.new(item_params)
+    if @item.save
+      redirect_to counters_village_path(@item.village), notice: 'Создано'
     else
-      render :edit, notice: 'Ошибка'
+      render :new
     end
   end
 
   def destroy
     if @item.destroy
-      redirect_to counters_path, notice: 'Удалено'
+      redirect_to counters_village_path(@item.village), notice: 'Удалено'
     else
-      redirect_to counters_path, notice: 'Ошибка при удалении'
+      redirect_to counters_village_path(@item.village), notice: 'Ошибка при удалении'
     end
   end
 
@@ -50,7 +50,8 @@ class CountersController < ApplicationController
   private
 
   def item_params
-    params[:counter].permit(:title, :code, :unit )
+    params
+    params[:counter].permit(:title, :code, :unit, :village_code )
   end
 
   def set_item

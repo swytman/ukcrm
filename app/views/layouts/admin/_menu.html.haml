@@ -1,21 +1,14 @@
 %ul.nav.navbar-nav
   - if current_user
     %li
-      %a{:href => counters_path}
-        Счетчики
-        %span.sr-only (current)
-    %li
-      %a{:href => meterings_path}
-        Показания
+      %a{:href => villages_path}
+        Организации
     %li
       %a{:href => groups_path}
         Группы
     %li
       %a{:href => roles_path}
         Роли
-    %li
-      %a{:href => villages_path}
-        Организации
     %li
       %a{:href => users_path}
         Пользователи

@@ -1,6 +1,6 @@
 class VillagesController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_item, only: [:show, :edit, :update, :destroy, :users]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :users, :counters]
 
   def index
     @items = Village.all
@@ -15,7 +15,7 @@ class VillagesController < ApplicationController
   end
 
   def new
-    @item = Village.new
+    @village = @item = Village.new
   end
 
   def update
@@ -28,7 +28,11 @@ class VillagesController < ApplicationController
 
   def users
     @items = User.where(village_code: @item.code)
-    # @home = users_villages_path(@item)
+  end
+
+  def counters
+    @items = Counter.where(village_code: @item.code)
+    render "counters/index"
   end
 
   def create
@@ -59,7 +63,7 @@ class VillagesController < ApplicationController
   end
 
   def set_item
-    @item = Village.find(params[:id])
+    @village = @item = Village.find(params[:id])
   end
 
 end

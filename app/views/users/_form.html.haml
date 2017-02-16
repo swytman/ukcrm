@@ -28,10 +28,12 @@
     .col-sm-5
       = f.collection_select :group_ids, Group.all.to_a, :id, :title, {selected: @item.group_ids}, {class: 'form-control displaynone', multiple: true}
 
+  - if @redirect_path
+    = hidden_field_tag :redirect_path, @redirect_path
 
   .form-group
     .col-sm-12
       = f.submit 'Сохранить', class: 'btn btn-success'
       %a.btn.btn-default{href: request.referer} Отмена
       - unless @item.new_record?
-        = link_to 'Удалить', user_path(@item), method: :delete, class: 'btn btn-danger pull-right', confirm: 'Подтвердите удаление'
+        = link_to 'Удалить', user_path(@item, redirect_path: @redirect_path), method: :delete, class: 'btn btn-danger pull-right', confirm: 'Подтвердите удаление'
