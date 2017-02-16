@@ -4,7 +4,7 @@
 
 .row.top20
   .col-sm-12
-    - Counter.all.each do |c|
+    - @village.counters.each do |c|
       - klass = 'btn-default'
       - klass = 'btn-primary' if @code == c.code
       = link_to c.title, meterings_path(code: c.code), class: "btn #{klass} btn-sm"
