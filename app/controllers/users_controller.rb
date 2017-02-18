@@ -50,10 +50,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def tariffs
-    @tariffs = Tariff.by_code(@item.code)
-  end
-
   private
 
   def item_params

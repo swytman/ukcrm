@@ -6,4 +6,4 @@ $(document).ready ->
   $('#tabs a[href="#base"]').tab('show')
 
 
-  $('.form-horizontal select').chosen()
+  $('.form-horizontal select').chosen({ width: '100%' })

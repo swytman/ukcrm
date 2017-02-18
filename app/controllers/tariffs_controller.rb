@@ -1,5 +1,6 @@
 class TariffsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_env
   before_filter :authenticate_user!
 
   def index
@@ -15,8 +16,8 @@ class TariffsController < ApplicationController
   end
 
   def new
-    code = params[:counter_code] if params[:counter_code].present?
-    @item = Tariff.new(counter_code: code)
+    counter_id = params[:counter_id] if params[:counter_id].present?
+    @item = Tariff.new(counter_id: counter_id)
   end
 
   def update
@@ -46,10 +47,20 @@ class TariffsController < ApplicationController
 
   private
 
+  def set_env
+    if @item
+      @counter = @item.counter
+      @village = @item.village
+    elsif params[:counter_id]
+      @counter = Counter.find(params[:counter_id])
+      @village = @counter.village if @counter
+    end
+  end
+
   def item_params
     params[:tariff][:rate] = params[:tariff][:rate].gsub(',', '.') if params[:tariff][:rate]
 
-    params[:tariff].permit(:year, :month, :rate, :counter_code)
+    params[:tariff].permit(:year, :month, :rate, :counter_id)
   end
 
   def set_item

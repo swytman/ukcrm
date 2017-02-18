@@ -22,7 +22,7 @@
               %td= index+1
               %td= link_to item.title, counter_path(item.id)
               %td= item.code
-              - last = Tariff.current(item.code)
+              - last = item.current_tariff
               %td
                 - if last
                   = last.full_title

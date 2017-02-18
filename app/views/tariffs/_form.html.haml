@@ -13,7 +13,7 @@
     .col-sm-3
       %label Счетчик
     .col-sm-9
-      = f.select :counter_code, Counter.all.map{|c| [c.title, c.code]}, { class: 'form-control'}
+      = f.select :counter_id, @village.counters.map{|c| [c.title, c.id]}, { class: 'form-control'}
 
   .form-group
     .col-sm-3
@@ -27,4 +27,4 @@
       = f.submit 'Сохранить', class: 'btn btn-success'
       %a.btn.btn-default{href: request.referer} Отмена
       - unless @item.new_record?
-        = link_to 'Удалить', counter_path(@item), method: :delete, class: 'btn btn-danger pull-right', confirm: 'Подтвердите удаление'
+        = link_to 'Удалить', tariff_path(@item), method: :delete, class: 'btn btn-danger pull-right', confirm: 'Подтвердите удаление'

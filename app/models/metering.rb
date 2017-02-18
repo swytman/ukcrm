@@ -6,7 +6,7 @@ class Metering < ActiveRecord::Base
   validates :value, presence: true
 
   def self.by_code(code)
-    joins(:tariff).where(tariffs: {counter_code: code}).order('year DESC, month DESC')
+    joins(:tariff => :counter).where(counters: {code: code}).order('year DESC, month DESC')
   end
 
   def date

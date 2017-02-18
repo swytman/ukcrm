@@ -4,10 +4,11 @@
 
 .row.top20
   .col-sm-12
-    - @village.counters.each do |c|
+    - @counters.each do |c|
       - klass = 'btn-default'
-      - klass = 'btn-primary' if @code == c.code
-      = link_to c.title, meterings_path(code: c.code), class: "btn #{klass} btn-sm"
+      - klass = 'btn-primary' if @counter.id == c.id
+      - klass = 'disabled' unless c.current_tariff
+      = link_to c.title, meterings_path(counter_id: c.id), class: "btn #{klass} btn-sm"
 
 .row
   .col-sm-12
@@ -34,15 +35,14 @@
 
 .row
   .col-sm-12.top20
-    = link_to "Добавить", new_metering_path(code: @code), class: "btn btn-success btn-sm"
+    = link_to "Добавить", new_metering_path(counter_id: @counter.id), class: "btn btn-success btn-sm"
 
-- if @code
+- if @counter
   - labels = []
   - values = []
   - values_rub = []
   - items = @items.reverse.to_a
-  - counter = Counter.find_by(code: @code)
-  - title = "#{counter.title}, #{counter.unit}"
+  - title = "#{@counter.title}, #{@counter.unit}"
   - items.each_with_index do |item, i|
     - labels << item.date
     - if i > 0

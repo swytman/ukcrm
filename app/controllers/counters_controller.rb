@@ -2,10 +2,6 @@ class CountersController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_item, only: [:show, :edit, :update, :destroy, :tariffs]
 
-  def index
-    @items = @village.counters
-  end
-
   def show
     redirect_to :action => "edit"
   end
@@ -44,7 +40,7 @@ class CountersController < ApplicationController
   end
 
   def tariffs
-    @tariffs = Tariff.by_code(@item.code)
+    @tariffs = @item.tariffs
   end
 
   private

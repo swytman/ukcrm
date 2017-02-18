@@ -6,7 +6,7 @@
   .col-md-10.col-lg-10.col-xs-7
     %h3 Тарифы счетчика
   .col-sm-2.pull-right.top20
-    = link_to "Добавить", new_tariff_path(counter_code: @item.code), class: "btn btn-primary btn-sm"
+    = link_to "Добавить", new_tariff_path(counter_id: @item.id), class: "btn btn-primary btn-sm"
 .row
   .col-sm-12
     - if @tariffs.to_a.size > 0
@@ -14,7 +14,7 @@
         %thead
           %tr
             %th #
-            %th.col-sm-4 Месяц
+            %th.col-sm-8 Месяц
             %th.col-sm-4 Тариф
         %tbody
           - @tariffs.each_with_index do |item, index|

@@ -1,5 +1,7 @@
 class Counter < ActiveRecord::Base
   belongs_to :village, class_name: 'Village', primary_key: 'code', foreign_key: 'village_code'
+  has_many :tariffs, inverse_of: :counter
+  has_many :meterings, through: :tariffs
 
   validates :code, presence: true
   validates :code, uniqueness: { scope: :village_code,
@@ -9,9 +11,8 @@ class Counter < ActiveRecord::Base
   validates :title, presence: true
 
 
-  def build_full_code
-
-
+  def current_tariff
+    tariffs.order('year DESC, month DESC').first
   end
 
 end
