@@ -1,6 +1,6 @@
 class TariffsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_parents, only: [:show, :edit, :update, :destroy]
+  before_action :set_parents
   before_action :set_env
   before_filter :authenticate_user!
 
@@ -17,22 +17,21 @@ class TariffsController < ApplicationController
   end
 
   def new
-    counter_id = params[:counter_id] if params[:counter_id].present?
-    @item = Tariff.new(counter_id: counter_id)
+    @item = @counter.tariffs.new
   end
 
   def update
     if @item.update(item_params)
-      redirect_to tariffs_counter_path(@item.counter), notice: 'Изменения сохранены'
+      redirect_to village_counter_tariffs_path(@village, @counter), notice: 'Изменения сохранены'
     else
       render "tariffs/edit"
     end
   end
 
   def create
-    item = Tariff.new(item_params)
-    if item.save
-      redirect_to tariffs_counter_path(item.counter), notice: 'Создано'
+    @item = @counter.tariffs.new(item_params)
+    if @item.save
+      redirect_to village_counter_tariffs_path(@village, @counter), notice: 'Создано'
     else
       render :edit, notice: 'Ошибка'
     end
@@ -40,9 +39,9 @@ class TariffsController < ApplicationController
 
   def destroy
     if @item.destroy
-      redirect_to tariffs_counter_path(@item.counter), notice: 'Удалено'
+      redirect_to village_counter_tariffs_path(@village, @counter), notice: 'Удалено'
     else
-      redirect_to tariffs_counter_path(@item.counter), notice: 'Ошибка при удалении'
+      redirect_to village_counter_tariffs_path(@village, @counter), notice: 'Ошибка при удалении'
     end
   end
 
@@ -61,7 +60,7 @@ class TariffsController < ApplicationController
   def item_params
     params[:tariff][:rate] = params[:tariff][:rate].gsub(',', '.') if params[:tariff][:rate]
 
-    params[:tariff].permit(:year, :month, :rate, :counter_id)
+    params[:tariff].permit(:year, :month, :rate)
   end
 
   def set_item

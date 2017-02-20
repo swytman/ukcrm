@@ -1,7 +1,5 @@
-%ul.breadcrumb
-  %li= link_to 'Показания', meterings_path(counter_id: @counter.id)
-  %li= @item.date
+= render 'breadcrumbs'
 
 %h3 Редактировать
 %br
-= render partial: 'form', locals: {form_action: metering_path(@item)}
+= render partial: 'form', locals: {form_action: user_metering_path(@user, @item)}

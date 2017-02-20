@@ -1,4 +1,3 @@
 %ul.breadcrumb
-  %li= link_to 'Счетчики', counters_village_path(@item.village)
-  %li= link_to @item.counter.title, tariffs_counter_path(@item.counter)
-  %li Редактировать
+  %li= link_to 'Счетчики', village_counters_path(@village)
+  %li= link_to @counter.title, edit_village_counter_path(@village, @counter)

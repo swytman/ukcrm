@@ -1,3 +1,4 @@
-%ul.nav.nav-tabs.offset-top-20
-  = tab "Общая", edit_user_path(@item)
-  = tab "Показания", meterings_user_path(@item)
+- unless @item.new_record?
+  %ul.nav.nav-tabs.offset-top-20
+    = tab "Общая", edit_user_path(@item)
+    = tab "Показания", user_meterings_path(@item)

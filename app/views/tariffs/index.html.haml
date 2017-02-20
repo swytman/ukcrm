@@ -1,27 +1,25 @@
 = render 'breadcrumbs'
 
-= render 'tabs'
-
 .row
   .col-md-10.col-lg-10.col-xs-7
     %h3 Тарифы счетчика
   .col-sm-2.pull-right.top20
-    = link_to "Добавить", new_tariff_path(counter_id: @item.id), class: "btn btn-primary btn-sm"
+    = link_to "Добавить", new_village_counter_tariff_path(@village, @counter), class: "btn btn-primary btn-sm"
 .row
   .col-sm-12
-    - if @tariffs.to_a.size > 0
+    - if @items.to_a.size > 0
       %table.table.table-stripped.table-hover
         %thead
-          %tr
+          %trCou
             %th #
             %th.col-sm-8 Месяц
             %th.col-sm-4 Тариф
         %tbody
-          - @tariffs.each_with_index do |item, index|
+          - @items.each_with_index do |item, index|
             %tr
               %td= index+1
-              %td= link_to item.date, edit_tariff_path(item)
-              %td= link_to item.rate, edit_tariff_path(item)
+              %td= link_to item.date, edit_village_counter_tariff_path(@village, @counter, item)
+              %td= link_to item.rate, edit_village_counter_tariff_path(@village, @counter, item)
 
     - else
       %p Нет тарифов

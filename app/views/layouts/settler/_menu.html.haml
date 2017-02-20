@@ -1,7 +1,7 @@
 %ul.nav.navbar-nav
   - if current_user
     %li
-      %a{:href => meterings_path}
+      %a{:href => user_meterings_path(current_user)}
         Показания
 
 
