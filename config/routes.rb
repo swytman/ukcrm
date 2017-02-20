@@ -8,23 +8,18 @@ Rails.application.routes.draw do
 
   root :to => 'static_pages#index'
 
-  resources :counters do
-    member do
-      get :tariffs
-    end
-  end
-
-
-  resources :meterings
-  resources :tariffs
-
   resources :groups
   resources :roles
-  resources :users
+  resources :users do
+    resources :meterings
+  end
+
   resources :villages do
     member do
       get :users
-      get :counters
+    end
+    resources :counters do
+      resources :tariffs
     end
   end
 

@@ -1,6 +1,12 @@
 class CountersController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_item, only: [:show, :edit, :update, :destroy, :tariffs]
+  before_action :set_parents
+
+
+  def index
+    @items = @village.counters
+  end
 
   def show
     redirect_to :action => "edit"
@@ -11,21 +17,21 @@ class CountersController < ApplicationController
   end
 
   def new
-    @item = Counter.new(village_code: params[:village_code])
+    @item = @village.counters.new
   end
 
   def update
     if @item.update(item_params)
-      redirect_to edit_counter_path(@item), notice: 'Изменения сохранены'
+      redirect_to edit_village_counter_path(@village, @item), notice: 'Изменения сохранены'
     else
       render "counters/edit"
     end
   end
 
   def create
-    @item = Counter.new(item_params)
+    @item = @village.counters.new(item_params)
     if @item.save
-      redirect_to counters_village_path(@item.village), notice: 'Создано'
+      redirect_to village_counters_path(@village), notice: 'Создано'
     else
       render :new
     end
@@ -33,9 +39,9 @@ class CountersController < ApplicationController
 
   def destroy
     if @item.destroy
-      redirect_to counters_village_path(@item.village), notice: 'Удалено'
+      redirect_to village_counters_path(@village), notice: 'Удалено'
     else
-      redirect_to counters_village_path(@item.village), notice: 'Ошибка при удалении'
+      redirect_to village_counters_path(@village), notice: 'Ошибка при удалении'
     end
   end
 
@@ -46,12 +52,15 @@ class CountersController < ApplicationController
   private
 
   def item_params
-    params
     params[:counter].permit(:title, :code, :unit, :village_code )
   end
 
   def set_item
     @item = Counter.find(params[:id])
+  end
+
+  def set_parents
+    @village = Village.find(params[:village_id])
   end
 
 end

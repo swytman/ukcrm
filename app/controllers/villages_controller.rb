@@ -30,11 +30,6 @@ class VillagesController < ApplicationController
     @items = User.where(village_code: @item.code)
   end
 
-  def counters
-    @items = Counter.where(village_code: @item.code)
-    render "counters/index"
-  end
-
   def create
     @item = Village.new(item_params)
     if @item.save

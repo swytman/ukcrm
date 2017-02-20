@@ -7,11 +7,11 @@
     .col-sm-9
       = f.text_field :title, class: 'form-control',  :autofocus=>true
 
-  .form-group
-    .col-sm-3
-      %label Поселок
-    .col-sm-9
-      = f.select :village_code, Village.all.map{|c| [c.title, c.code]}, { class: 'chosen-select'}
+  -#.form-group
+  -#  .col-sm-3
+  -#    %label Поселок
+  -#  .col-sm-9
+  -#    = f.select :village_code, Village.all.map{|c| [c.title, c.code]}, { class: 'chosen-select'}
 
   .form-group
     .col-sm-3
@@ -30,4 +30,4 @@
       = f.submit 'Сохранить', class: 'btn btn-success'
       %a.btn.btn-default{href: request.referer} Отмена
       - unless @item.new_record?
-        = link_to 'Удалить', counter_path(@item), method: :delete, class: 'btn btn-danger pull-right', confirm: 'Подтвердите удаление'
+        = link_to 'Удалить', village_counter_path(@village, @item), method: :delete, class: 'btn btn-danger pull-right', confirm: 'Подтвердите удаление'

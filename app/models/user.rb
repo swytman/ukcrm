@@ -20,6 +20,17 @@ class User < ActiveRecord::Base
     return village.users if is?(:manager)
   end
 
+  def groups_allowed_for_assign
+    groups = []
+    if is?(:administrator)
+      groups = Group.all
+    end
+    if is?(:manager)
+      groups = Group.not_system_groups
+    end
+    groups
+  end
+
   def full_name_with_email
     if full_name.present? && email.present?
       "#{full_name} (#{email})"

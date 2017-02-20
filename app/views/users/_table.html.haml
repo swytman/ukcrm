@@ -9,7 +9,7 @@
             %th #
             %th.col-sm-6 ФИО
             %th.col-sm-6 Email
-            %th.col-sm-6 Роли
+            %th.col-sm-6 Группы
             %th Код
         %tbody
           - items.each_with_index do |item, index|
@@ -17,7 +17,7 @@
               %td= index+1
               %td= link_to item.title, edit_user_path(item.id, village_id: village_id)
               %td= item.email
-              %td= item.roles.map(&:title).join(', ')
+              %td= item.groups.map(&:title).join(', ')
               %td= item.village_code
 
     - else

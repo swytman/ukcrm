@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_item, only: [:show, :edit, :update, :destroy, :users]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :users, :meterings]
   before_action :set_redirect_path, only: [:new, :show, :edit, :update, :create, :destroy]
 
   def index
@@ -50,10 +50,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def meterings
+    @counters = @item.village.counters
+    @counter =  @counters.first
+    @counter =  Counter.find(params[:counter_id]) if params[:counter_id]
+    @items = @counter.meterings.where(user_id: @item.id).order('year DESC, month DESC')
+  end
+
   private
 
   def item_params
-    params[:user][:role_ids] = params[:user][:role_ids].reject(&:blank?).map(&:to_i)
+    params[:user][:role_ids] = params[:user][:role_ids].reject(&:blank?).map(&:to_i) if params[:user][:role_ids]
     params[:user].permit(:title, :village_code, :email, :group_ids => [], :role_ids => [])
   end
 

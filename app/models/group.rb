@@ -1,5 +1,5 @@
 class Group < ActiveRecord::Base
-  SYSTEM_GROUPS = []
+  SYSTEM_GROUPS = [:administrators, :managers]
 
   has_and_belongs_to_many :users
   has_and_belongs_to_many :roles
@@ -22,6 +22,14 @@ class Group < ActiveRecord::Base
 
   def system?
     SYSTEM_GROUPS.include? key.try(:to_sym)
+  end
+
+  def self.not_system_groups
+    Group.where.not(key: SYSTEM_GROUPS)
+  end
+
+  def self.system_groups
+    Group.where(key: SYSTEM_GROUPS)
   end
 
   def admins_will_be_empty?(ids)

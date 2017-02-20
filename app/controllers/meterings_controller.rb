@@ -7,7 +7,7 @@ class MeteringsController < ApplicationController
   before_action :set_env
 
   def index
-    @counters = @village.counters
+    @counters = @user.village.counters
     @counter =  @counters.first
     @counter =  Counter.find(params[:counter_id]) if params[:counter_id]
     @items = @counter.meterings.where(user_id: @user.id).order('year DESC, month DESC')

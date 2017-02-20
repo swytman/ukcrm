@@ -1,0 +1,19 @@
+- if @counter
+  - labels = []
+  - values = []
+  - values_rub = []
+  - items = @items.reverse.to_a
+  - title = "#{@counter.title}, #{@counter.unit}"
+  - items.each_with_index do |item, i|
+    - labels << item.date
+    - if i > 0
+      - diff = items[i].value - items[i-1].value
+    - else
+      - diff = items[i].value
+    - values << diff
+    - values_rub << item.total
+
+  = render partial: 'chart_values', locals: {title: title, labels: labels, values: values }
+
+  - title = "Итого, руб."
+  = render partial: 'chart_price', locals: {title: title, labels: labels, values: values_rub }

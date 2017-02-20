@@ -1,10 +1,11 @@
 class TariffsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_parents, only: [:show, :edit, :update, :destroy]
   before_action :set_env
   before_filter :authenticate_user!
 
   def index
-    @items = Tariff.all
+    @items = @counter.tariffs
   end
 
   def show
@@ -66,4 +67,10 @@ class TariffsController < ApplicationController
   def set_item
     @item = Tariff.find(params[:id])
   end
+
+  def set_parents
+    @village = Village.find(params[:village_id])
+    @counter = Counter.find(params[:counter_id])
+  end
+
 end
