@@ -15,4 +15,22 @@ class Counter < ActiveRecord::Base
     tariffs.order('year DESC, month DESC').first
   end
 
+  def tariff_for_month(month, year)
+    list = tariffs.order('year DESC, month DESC').to_a
+    list.each_with_index do |t, i|
+      compare_res = Helpers::Month.compare({month: month, year: year}, {month: t.month, year: t.year})
+
+      if compare_res == 0
+        return t
+      end
+
+      if compare_res == 1
+        return list[i]
+      end
+
+    end
+    return list.last
+  end
+
+
 end

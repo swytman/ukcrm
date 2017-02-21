@@ -9,11 +9,15 @@
       %label Год
     .col-sm-9
       = f.select :year, (Time.now.year-4...Time.now.year+2).map{|c| [c, c]}, { class: 'form-control'}
-  .form-group
-    .col-sm-3
-      %label Тариф
-    .col-sm-9
-      = f.select :tariff_id, @counter.tariffs.map{|c| [c.date, c.id]}, { class: 'form-control'}
+
+  - if current_user.is?(:manager, :administrator)
+    .form-group
+      .col-sm-3
+        %label Тариф
+      .col-sm-9
+        = f.select :tariff_id, @counter.tariffs.map{|c| [c.date, c.id]}, { class: 'form-control'}
+
+  = hidden_field_tag :counter_id, @counter.id
 
   .form-group
     .col-sm-3

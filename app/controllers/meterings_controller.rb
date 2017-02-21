@@ -20,17 +20,26 @@ class MeteringsController < ApplicationController
   end
 
   def new
-    @item = @user.meterings.new(tariff_id: @counter.current_tariff.id)
-    last = Metering.last
-    if last
-      @item.year = last.year
-      @item.month = last.month
+    @item = @counter.meterings.new(user_id: @user.id)
+    last_metering = @counter.meterings.where(user_id: @user.id).order('year DESC, month DESC').try(:first)
+    if last_metering
+      next_obj = Helpers::Month.next_month(last_metering.month, last_metering.year)
+      @item.year = next_obj[:year]
+      @item.month = next_obj[:month]
+      @item.tariff = @item.counter.tariff_for_month(@item.month, @item.year)
+    else
+      @item.tariff = @counter.tariff_for_month( DateTime.now.month,  DateTime.now.year)
+      @item.year = DateTime.now.year
+      @item.month =  DateTime.now.month
     end
-
   end
 
   def update
     if @item.update(item_params)
+      unless item_params[:tariff_id]
+        @item.tariff = @item.counter.tariff_for_month(@item.month, @item.year)
+        @item.save
+      end
       redirect_to user_meterings_path(@user, counter_id: @item.counter.id), notice: 'Изменения сохранены'
     else
       render "meterings/edit"
@@ -38,7 +47,13 @@ class MeteringsController < ApplicationController
   end
 
   def create
+    @counter = Counter.find(params[:counter_id])
     @item = @user.meterings.new(item_params)
+
+    unless @item.tariff
+      @item.tariff = @counter.tariff_for_month(@item.month, @item.year)
+    end
+
     if @item.save
       redirect_to user_meterings_path(@user, counter_id: @item.counter.id), notice: 'Создано'
     else
