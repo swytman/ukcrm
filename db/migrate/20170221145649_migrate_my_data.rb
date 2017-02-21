@@ -1,7 +1,7 @@
 class MigrateMyData < ActiveRecord::Migration
   def change
     @user = User.new({title: '58-3', email: 'ravensl@mail.ru'})
-    @item.skip_password_validation = true
+    @user.skip_password_validation = true
     @user.save
     @village = Village.last
 
