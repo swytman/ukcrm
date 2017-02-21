@@ -10,6 +10,8 @@
       %a.navbar-brand{:href => root_path} MyVillage.online
     / Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      = current_user.is?(:settler)
+      = current_user.groups.map(&:title)
       - if current_user
         - if current_user.is?(:administrator)
           = render 'layouts/admin/menu'
