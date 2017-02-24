@@ -26,7 +26,7 @@ class MeteringsController < ApplicationController
       next_obj = Helpers::Month.next_month(last_metering.month, last_metering.year)
       @item.year = next_obj[:year]
       @item.month = next_obj[:month]
-      @item.tariff = @item.counter.tariff_for_month(@item.month, @item.year)
+      @item.tariff = @counter.tariff_for_month(@item.month, @item.year)
     else
       @item.tariff = @counter.tariff_for_month( DateTime.now.month,  DateTime.now.year)
       @item.year = DateTime.now.year
