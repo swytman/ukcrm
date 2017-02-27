@@ -1,5 +1,5 @@
 .row
-  .col-sm-4
+  .col-sm-6
     - waiting_month = ::Helpers::Month.waiting_month
     %h5.text-center Показания счетчиков за #{I18n.t("date.one_month_names")[waiting_month[:month]]}
     %hr
@@ -9,9 +9,9 @@
       - waiting_counters.keys.each do |id|
         - counter =  Counter.find(id)
         .form-group
-          .col-sm-3
+          .col-sm-6
             %label= counter.title
-          .col-sm-9
+          .col-sm-3
             = text_field_tag "counters[#{id}]", waiting_counters[id].try(:value) , class: 'form-control'
 
 
