@@ -28,4 +28,16 @@ class Helpers::Month
     return 0
   end
 
+  def self.waiting_month
+    now = DateTime.now
+    day = now.day
+    month = now.month
+    year = now.year
+    if day > 20
+      return {month: month, year: year}
+    else
+      return prev_month(month, year)
+    end
+  end
+
 end

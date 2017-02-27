@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :roles
   resources :users do
     resources :meterings
+    member do
+      patch :send_counters
+    end
   end
 
   resources :villages do

@@ -46,6 +46,8 @@ class MeteringsController < ApplicationController
     end
   end
 
+
+
   def create
     @counter = Counter.find(params[:counter_id])
     @item = @user.meterings.new(item_params)

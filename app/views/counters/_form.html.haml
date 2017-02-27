@@ -20,6 +20,11 @@
       = f.text_field :code, class: 'form-control'
   .form-group
     .col-sm-3
+      %label Заполняется жителем
+    .col-sm-9
+      = f.check_box :editable_by_settler
+  .form-group
+    .col-sm-3
       %label Единица измерения (сокращение)
     .col-sm-9
       = f.text_field :unit, class: 'form-control'

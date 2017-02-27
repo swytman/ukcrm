@@ -1,0 +1,3 @@
+- waiting_counters = current_user.waiting_counters
+- if waiting_counters
+  = render partial: 'static_pages/settler/send_counters_form', locals: {waiting_counters: waiting_counters}

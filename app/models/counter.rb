@@ -10,9 +10,15 @@ class Counter < ActiveRecord::Base
   validates :village_code, presence: true
   validates :title, presence: true
 
+  scope :editable_by_settler, -> () { where(:editable_by_settler => true) }
+
 
   def current_tariff
     tariffs.order('year DESC, month DESC').first
+  end
+
+  def editable_by_user?(user)
+    user.is?(:manager, :administrator) || editable_by_settler
   end
 
   def tariff_for_month(month, year)

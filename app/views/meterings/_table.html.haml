@@ -1,3 +1,4 @@
+- editable = @counter.editable_by_user?(current_user)
 .row.top20
   .col-sm-12
     - @counters.each do |c|
@@ -21,14 +22,20 @@
           - @items.each_with_index do |item, index|
             %tr
               %td= index+1
-              %td= link_to item.date, user_metering_path(@user, item)
-              %td= link_to item.value, user_metering_path(@user, item)
+              - if editable
+                %td= link_to item.date, user_metering_path(@user, item)
+                %td= link_to item.value, user_metering_path(@user, item)
+              - else
+                %td= item.date
+                %td= item.value
               %td= item.tariff.full_title
               %td= item.total.round(2)
 
     - else
       %p Нет показаний
 
-.row
-  .col-sm-12.top20
-    = link_to "Добавить", new_user_metering_path(@user, counter_id: @counter.id), class: "btn btn-success btn-sm"
+
+- if editable
+  .row
+    .col-sm-12.top20
+      = link_to "Добавить", new_user_metering_path(@user, counter_id: @counter.id), class: "btn btn-success btn-sm"

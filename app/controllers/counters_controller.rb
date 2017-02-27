@@ -52,7 +52,7 @@ class CountersController < ApplicationController
   private
 
   def item_params
-    params[:counter].permit(:title, :code, :unit, :village_code )
+    params[:counter].permit(:title, :code, :unit, :village_code, :editable_by_settler )
   end
 
   def set_item

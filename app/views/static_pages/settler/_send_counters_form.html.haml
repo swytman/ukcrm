@@ -1,0 +1,20 @@
+.row
+  .col-sm-4
+    - waiting_month = ::Helpers::Month.waiting_month
+    %h5.text-center Показания счетчиков за #{I18n.t("date.one_month_names")[waiting_month[:month]]}
+    %hr
+    = form_for current_user, url: send_counters_user_path(current_user) , html: {class: 'form form-horizontal'} do
+      = hidden_field_tag :month, waiting_month[:month]
+      = hidden_field_tag :year, waiting_month[:year]
+      - waiting_counters.keys.each do |id|
+        - counter =  Counter.find(id)
+        .form-group
+          .col-sm-3
+            %label= counter.title
+          .col-sm-9
+            = text_field_tag "counters[#{id}]", waiting_counters[id].try(:value) , class: 'form-control'
+
+
+      .form-group
+        .col-sm-3.pull-right
+          = submit_tag 'Отправить', class: 'btn btn-success pull-right'
