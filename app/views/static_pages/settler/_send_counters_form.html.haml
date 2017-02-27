@@ -9,7 +9,7 @@
       - waiting_counters.keys.each do |id|
         - counter =  Counter.find(id)
         .form-group
-          .col-sm-6
+          .col-sm-9
             %label= counter.title
           .col-sm-3
             = text_field_tag "counters[#{id}]", waiting_counters[id].try(:value) , class: 'form-control'
