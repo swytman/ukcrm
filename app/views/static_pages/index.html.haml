@@ -1,2 +1,2 @@
-- if current_user.is?(:settler)
+- if current_user && current_user.is?(:settler)
   = render 'static_pages/settler/index'
