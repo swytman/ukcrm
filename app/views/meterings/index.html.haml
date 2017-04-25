@@ -1,10 +1,7 @@
 - if current_user.is?(:manager, :administrator) && @user.village
   %ul.breadcrumb
     %li= link_to 'Пользователи', users_village_path(@user.village)
-
-.row
-  .col-md-12
-    %h3 Показания
+    %li= link_to @user.title, edit_user_path(@user)
 
 = render partial: 'table'
 

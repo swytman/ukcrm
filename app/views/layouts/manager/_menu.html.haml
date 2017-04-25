@@ -4,6 +4,9 @@
       %li
         %a{ :href => users_village_path(current_user.village) }
           Жители
+      %li
+        %a{ :href => village_counters_path(current_user.village) }
+          Счетчики
     %li.dropdown
       %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
         Отчеты
