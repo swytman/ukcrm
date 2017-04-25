@@ -1,9 +1,15 @@
 %ul.nav.navbar-nav
-  - if current_user
+  - if current_user.present?
     %li
       %a{:href => villages_path}
         Организации
-
+    %li.dropdown
+      %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+        Отчеты
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          %a{:href => monthly_counters_reports_path} Показания счетчиков
 
 
 

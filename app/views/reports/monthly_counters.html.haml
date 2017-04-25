@@ -1,0 +1,21 @@
+.h3 Показания счетчиков
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Дом
+      - @counters.each do |i|
+        %th= i.title
+      %th
+  %tbody
+    - @users.each do |user|
+      - current = user.current_month_counters
+      - klass = ''
+      - klass = 'danger' if current.values.include?(nil)
+      %tr{class: "#{klass}"}
+        %td=link_to user.title, user_meterings_path(user)
+        - @counters.each do |i|
+          %td= current[i.id].try(:value)
+        %td
+          - if klass == 'danger'
+            = link_to 'Напомнить', "#"

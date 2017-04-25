@@ -34,6 +34,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def current_month_counters
+    waiting_month = Helpers::Month.waiting_month
+    result = {}
+    return false unless is?(:settler) || village.nil?
+    counters = village.counters.where(:editable_by_settler => true)
+    counters.each do |c|
+      result[c.id] = c.meterings.where(user_id: id, month: waiting_month[:month], year: waiting_month[:year]).
+          order('year DESC, month DESC').try(:first)
+    end
+    result
+  end
 
   def users
     return User.all if is?(:administrator)
@@ -104,6 +115,14 @@ class User < ActiveRecord::Base
     pending_any_confirmation {yield}
   end
 
+  def welcome_message
+    UserMailer.welcome_message(self).deliver
+  end
+
+  def remind_to_send_counters(month)
+    UserMailer.remind_to_send_counters(self, month).deliver
+  end
+
   protected
 
   def password_required?
@@ -112,7 +131,5 @@ class User < ActiveRecord::Base
   end
 
 
-  def welcome_message
-    UserMailer.welcome_message(self).deliver
-  end
+
 end

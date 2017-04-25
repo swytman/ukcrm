@@ -17,6 +17,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :reports do
+    collection do
+      get :monthly_counters
+    end
+  end
+
   resources :villages do
     member do
       get :users
