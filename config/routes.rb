@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :meterings
     member do
+      get :remind_to_send_counters
       patch :send_counters
     end
   end

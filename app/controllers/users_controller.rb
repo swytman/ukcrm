@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_item, only: [:show, :edit, :update, :destroy, :users, :meterings]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :users, :meterings, :remind_to_send_counters]
   before_action :set_redirect_path, only: [:new, :show, :edit, :update, :create, :destroy]
 
   def index
@@ -76,6 +76,18 @@ class UsersController < ApplicationController
     @counter =  @counters.first
     @counter =  Counter.find(params[:counter_id]) if params[:counter_id]
     @items = @counter.meterings.where(user_id: @item.id).order('year DESC, month DESC')
+  end
+
+  def remind_to_send_counters
+    user_ids = params[:user_ids]
+    if @item.is?([:manager, :administrator])
+      User.where(id: user_ids).each do |user|
+        user.remind_to_send_counters(Helpers::Month.waiting_month[:month])
+      end
+      redirect_to request.referer, notice: 'Уведомления отправлены'
+    else
+      redirect_to request.referer, notice: 'Нет прав'
+    end
   end
 
   private

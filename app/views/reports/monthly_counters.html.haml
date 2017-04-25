@@ -1,21 +1,30 @@
 .h3 Показания счетчиков
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th Дом
-      - @counters.each do |i|
-        %th= i.title
-      %th
-  %tbody
-    - @users.each do |user|
-      - current = user.current_month_counters
-      - klass = ''
-      - klass = 'danger' if current.values.include?(nil)
-      %tr{class: "#{klass}"}
-        %td=link_to user.title, user_meterings_path(user)
+= form_tag remind_to_send_counters_user_path(current_user), method: :get, html: { role: 'form', class: 'remove_links_form'} do |f|
+
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Дом
         - @counters.each do |i|
-          %td= current[i.id].try(:value)
-        %td
-          - if klass == 'danger'
-            = link_to 'Напомнить', "#"
+          %th= i.title
+        %th
+          = check_box_tag('all', '1', false, class: 'checkbox-all', 'data-group' => 'remind_counters')
+    %tbody
+      - @users.each do |user|
+        - current = user.current_month_counters
+        - klass = ''
+        - klass = 'danger' if current.values.include?(nil)
+        %tr{class: "#{klass}"}
+          %td=link_to user.title, user_meterings_path(user)
+          - @counters.each do |i|
+
+            %td
+              = current[i.id].try(:value)
+          %td
+            - if klass == 'danger'
+              %input{ type: 'checkbox', name: "user_ids[]",
+                      value: user.id, class: 'checkbox-item', 'data-group' => 'remind_counters',
+                      checked: false}
+  .col-sm-3.pull-right.top20
+    = submit_tag 'Напомнить', class: 'btn-primary btn btn-sm pull-right'

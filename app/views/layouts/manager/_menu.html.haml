@@ -1,8 +1,9 @@
 %ul.nav.navbar-nav
   - if current_user.present?
-    %li
-      %a{:href => villages_path}
-        Организации
+    - if current_user.village.present?
+      %li
+        %a{ :href => users_village_path(current_user.village) }
+          Жители
     %li.dropdown
       %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
         Отчеты
