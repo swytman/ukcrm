@@ -1,0 +1,30 @@
+= render "villages/tabs"
+
+.row
+  .col-md-10.col-lg-10.col-xs-7
+    %h3 Объекты
+  .col-sm-2.pull-right.top20
+    = link_to "Создать", new_village_property_path(@village.id), class: "btn btn-primary btn-sm"
+.row
+  .col-sm-12
+    - if @items.any?
+      %table.table.table-stripped.table-hover
+        %thead
+          %tr
+            %th #
+            %th.col-sm-4 Название
+            %th.col-sm-4 Тип
+            %th.col-sm-4 Владелец
+        %tbody
+          - @items.each_with_index do |item, index|
+            %tr
+              %td= index+1
+              %td= link_to item.title, edit_village_property_path(@village.id, item.id)
+              %td= item.ptype
+              %td
+                - if item.user
+                  = item.user.title
+
+    - else
+      %p Нет объектов
+
