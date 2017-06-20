@@ -1,5 +1,5 @@
 %ul.breadcrumb
-  - if current_user.is?(:manager, :administrator) && @user.village
-    %li= link_to 'Пользователи', users_village_path(@user.village)
-  %li= link_to 'Показания', user_meterings_path(@user, counter_id: @counter.id)
+  - if current_user.is?(:manager, :administrator) && @village
+    %li= link_to 'Объекты', village_properties_path(@village)
+  %li= link_to 'Показания', village_property_meterings_path(@village, @property, counter_id: @counter.id)
   %li= @item.date

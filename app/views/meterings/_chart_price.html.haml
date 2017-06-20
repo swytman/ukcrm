@@ -3,11 +3,12 @@
 
 :javascript
   var ctx_price = $("#chart_prirce");
+  var labels = #{raw labels.to_json};
 
   var myChart = new Chart(ctx_price, {
       type: 'line',
       data: {
-          labels: #{labels},
+          labels: labels,
           datasets: [{
               label: "#{title}",
               data: #{values},

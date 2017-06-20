@@ -1,6 +1,6 @@
 class PropertiesController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :meterings]
   before_action :set_parents
 
   def index
@@ -13,6 +13,13 @@ class PropertiesController < ApplicationController
 
   def edit
 
+  end
+
+  def meterings
+    @counters = @item.village.counters
+    @counter =  @counters.first
+    @counter =  Counter.find(params[:counter_id]) if params[:counter_id]
+    @items = @counter.meterings.where(user_id: @item.id).order('year DESC, month DESC')
   end
 
   def new

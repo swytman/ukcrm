@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   resources :groups
   resources :roles
   resources :users do
-    resources :meterings
     member do
       get :remind_to_send_counters
       patch :send_counters
@@ -28,7 +27,9 @@ Rails.application.routes.draw do
     member do
       get :users
     end
-    resources :properties
+    resources :properties do
+      resources :meterings
+    end
     resources :counters do
       resources :tariffs
     end

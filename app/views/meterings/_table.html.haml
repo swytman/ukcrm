@@ -5,7 +5,7 @@
       - klass = 'btn-default'
       - klass = 'btn-primary' if @counter.id == c.id
       - klass = 'disabled' unless c.current_tariff
-      = link_to c.title, user_meterings_path(@user, counter_id: c.id), class: "btn #{klass} btn-sm"
+      = link_to c.title, village_property_meterings_path(@village, @property, counter_id: c.id), class: "btn #{klass} btn-sm"
 
 .row
   .col-sm-12
@@ -23,8 +23,8 @@
             %tr
               %td= index+1
               - if editable
-                %td= link_to item.date, user_metering_path(@user, item)
-                %td= link_to item.value, user_metering_path(@user, item)
+                %td= link_to item.date, village_property_metering_path(@village, @property, item)
+                %td= link_to item.value, village_property_metering_path(@village, @property, item)
               - else
                 %td= item.date
                 %td= item.value
@@ -38,4 +38,4 @@
 - if editable
   .row
     .col-sm-12.top20
-      = link_to "Добавить", new_user_metering_path(@user, counter_id: @counter.id), class: "btn btn-success btn-sm"
+      = link_to "Добавить", new_village_property_metering_path(@village, @property, counter_id: @counter.id), class: "btn btn-success btn-sm"

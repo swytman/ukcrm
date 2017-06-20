@@ -3,11 +3,12 @@
 
 :javascript
   var ctx_values = $("#chart_values");
+  var labels = #{raw labels.to_json};
 
   var myChart = new Chart(ctx_values, {
       type: 'bar',
       data: {
-          labels: #{labels},
+          labels: labels ,
           datasets: [{
               label: "#{title}",
               data: #{values},

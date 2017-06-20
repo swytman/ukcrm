@@ -5,10 +5,10 @@ class MeteringsController < ApplicationController
   before_action :set_parents
 
   def index
-    @counters = @user.village.counters
+    @counters = @property.village.counters
     @counter =  @counters.first
     @counter =  Counter.find(params[:counter_id]) if params[:counter_id]
-    @items = @counter.meterings.where(user_id: @user.id).order('year DESC, month DESC')
+    @items = @counter.meterings.where(property_id: @property.id).order('year DESC, month DESC')
   end
 
   def show
@@ -20,8 +20,8 @@ class MeteringsController < ApplicationController
   end
 
   def new
-    @item = @counter.meterings.new(user_id: @user.id)
-    last_metering = @counter.meterings.where(user_id: @user.id).order('year DESC, month DESC').try(:first)
+    @item = @counter.meterings.new(property_id: @property.id)
+    last_metering = @counter.meterings.where(property_id: @property.id).order('year DESC, month DESC').try(:first)
     if last_metering
       next_obj = Helpers::Month.next_month(last_metering.month, last_metering.year)
       @item.year = next_obj[:year]
@@ -40,7 +40,7 @@ class MeteringsController < ApplicationController
         @item.tariff = @item.counter.tariff_for_month(@item.month, @item.year)
         @item.save
       end
-      redirect_to user_meterings_path(@user, counter_id: @item.counter.id), notice: 'Изменения сохранены'
+      redirect_to village_property_meterings_path(@village, @property, counter_id: @item.counter.id), notice: 'Изменения сохранены'
     else
       render "meterings/edit"
     end
@@ -50,14 +50,14 @@ class MeteringsController < ApplicationController
 
   def create
     @counter = Counter.find(params[:counter_id])
-    @item = @user.meterings.new(item_params)
+    @item = @property.meterings.new(item_params)
 
     unless @item.tariff
       @item.tariff = @counter.tariff_for_month(@item.month, @item.year)
     end
 
     if @item.save
-      redirect_to user_meterings_path(@user, counter_id: @item.counter.id), notice: 'Создано'
+      redirect_to village_property_meterings_path(@village, @property, counter_id: @item.counter.id), notice: 'Создано'
     else
       render :edit, notice: 'Ошибка'
     end
@@ -65,9 +65,9 @@ class MeteringsController < ApplicationController
 
   def destroy
     if @item.destroy
-      redirect_to user_meterings_path(@user, counter_id: @item.counter.id), notice: 'Удалено'
+      redirect_to village_property_meterings_path(@village, @property, counter_id: @item.counter.id), notice: 'Удалено'
     else
-      redirect_to user_meterings_path(@user, counter_id: @item.counter.id), notice: 'Ошибка при удалении'
+      redirect_to village_property_meterings_path(@village, @property, counter_id: @item.counter.id), notice: 'Ошибка при удалении'
     end
   end
 
@@ -75,7 +75,8 @@ class MeteringsController < ApplicationController
   private
 
   def set_parents
-    @user = User.find(params[:user_id])
+    @village = Village.find(params[:village_id])
+    @property = Property.find(params[:property_id])
     @counter = Counter.find(params[:counter_id]) if params[:counter_id]
     @counter = @item.counter if @item
   end

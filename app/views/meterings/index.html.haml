@@ -1,7 +1,7 @@
-- if current_user.is?(:manager, :administrator) && @user.village
+- if current_user.is?(:manager, :administrator) && @village
   %ul.breadcrumb
-    %li= link_to 'Пользователи', users_village_path(@user.village)
-    %li= link_to @user.title, edit_user_path(@user)
+    %li= link_to 'Объекты', village_properties_path(@village)
+    %li= link_to @property.title, edit_village_property_path(@village, @property)
 
 = render partial: 'table'
 
