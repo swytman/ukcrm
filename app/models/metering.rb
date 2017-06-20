@@ -1,6 +1,7 @@
 class Metering < ActiveRecord::Base
   belongs_to :tariff
   belongs_to :user
+  belongs_to :property
   has_one :counter, through: :tariff
 
   validates :value, presence: true

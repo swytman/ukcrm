@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     member do
       get :users
     end
+    resources :properties
     resources :counters do
       resources :tariffs
     end

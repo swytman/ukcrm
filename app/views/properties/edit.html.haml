@@ -1,0 +1,6 @@
+= render 'breadcrumbs'
+= render 'tabs'
+
+%h3 Редактировать
+%br
+= render partial: 'form', locals: {form_action: village_property_path(@village, @item)}

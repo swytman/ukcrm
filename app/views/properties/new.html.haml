@@ -1,0 +1,5 @@
+= render 'breadcrumbs'
+
+%h3 Новый объект
+%br
+= render partial: 'form', locals: {form_action: village_properties_path(@village, @item)}
