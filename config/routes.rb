@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :roles
   resources :users do
     member do
+      get :properties
       get :remind_to_send_counters
       patch :send_counters
     end

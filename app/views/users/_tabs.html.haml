@@ -2,4 +2,4 @@
   %ul.nav.nav-tabs.offset-top-20
     = tab "Общая", edit_user_path(@item)
     -if @item.is?(:settler)
-      = tab "Показания", user_meterings_path(@item)
+      = tab "Объекты", properties_user_path(@item)

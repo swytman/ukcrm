@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:show, :edit, :update, :destroy, :users, :meterings, :remind_to_send_counters]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :users, :properties, :remind_to_send_counters]
   before_action :set_redirect_path, only: [:new, :show, :edit, :update, :create, :destroy]
 
   def index
@@ -71,11 +71,9 @@ class UsersController < ApplicationController
   end
 
 
-  def meterings
-    @counters = @item.village.counters
-    @counter =  @counters.first
-    @counter =  Counter.find(params[:counter_id]) if params[:counter_id]
-    @items = @counter.meterings.where(user_id: @item.id).order('year DESC, month DESC')
+  def properties
+    @items = Property.where(user_id: @item.id)
+    @village = @item.village
   end
 
   def remind_to_send_counters
