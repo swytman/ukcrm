@@ -60,7 +60,6 @@ class UsersController < ApplicationController
   def remind_to_send_counters
     property_ids = params[:property_ids]
     if @item.is?([:manager, :administrator])
-      df
       User.joins('RIGHT JOIN properties ON users.id = properties.user_id').where('properties.id' => property_ids).uniq.each do |user|
         user.remind_to_send_counters(Helpers::Month.waiting_month[:month])
       end
