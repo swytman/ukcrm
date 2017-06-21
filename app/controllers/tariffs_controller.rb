@@ -2,7 +2,7 @@ class TariffsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_parents
   before_action :set_env
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def index
     @items = @counter.tariffs
