@@ -51,25 +51,6 @@ class UsersController < ApplicationController
   end
 
 
-  def send_counters
-    if params[:counters].size > 0 && params[:month] && params[:year]
-      params[:counters].keys.each do |c|
-        counter = Counter.find_by(id: c)
-        if counter
-          tariff_id =  counter.tariff_for_month( params[:month].to_i, params[:year].to_i ).try(:id)
-          hash = { tariff_id: tariff_id, user_id: current_user.id, month: params[:month], year: params[:year] }
-          metering = Metering.find_by(hash)
-          if metering
-            metering.update_attribute( 'value', params[:counters][c] )
-          else
-            Metering.create( hash.merge!({value: params[:counters][c] }) )
-          end
-        end
-      end
-    end
-    redirect_to root_path
-  end
-
 
   def properties
     @items = Property.where(user_id: @item.id)
@@ -77,9 +58,10 @@ class UsersController < ApplicationController
   end
 
   def remind_to_send_counters
-    user_ids = params[:user_ids]
+    property_ids = params[:property_ids]
     if @item.is?([:manager, :administrator])
-      User.where(id: user_ids).each do |user|
+      df
+      User.joins('RIGHT JOIN properties ON users.id = properties.user_id').where('properties.id' => property_ids).uniq.each do |user|
         user.remind_to_send_counters(Helpers::Month.waiting_month[:month])
       end
       redirect_to request.referer, notice: 'Уведомления отправлены'

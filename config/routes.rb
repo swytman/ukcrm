@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     member do
       get :properties
       get :remind_to_send_counters
-      patch :send_counters
     end
   end
 
@@ -29,6 +28,9 @@ Rails.application.routes.draw do
       get :users
     end
     resources :properties do
+      member do
+        patch :send_counters
+      end
       resources :meterings
     end
     resources :counters do

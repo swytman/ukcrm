@@ -5,26 +5,27 @@
   %table.table.table-striped
     %thead
       %tr
-        %th Дом
+        %th Объект
+        %th Житель
         - @counters.each do |i|
           %th= i.title
         %th
           = check_box_tag('all', '1', false, class: 'checkbox-all', 'data-group' => 'remind_counters')
     %tbody
-      - @users.each do |user|
-        - current = user.current_month_counters
+      - @properties.each do |property|
+        - current = ::Helpers::Counter.current_month_counters(property)
         - klass = ''
         - klass = 'danger' if current.values.include?(nil)
         %tr{class: "#{klass}"}
-          %td=link_to user.title, user_meterings_path(user)
+          %td=link_to property.title, edit_village_property_path(@village, property)
+          %td= (property.user.present? ? link_to(property.user.full_name, edit_user_path(property.user)) : '')
           - @counters.each do |i|
-
             %td
               = current[i.id].try(:value)
           %td
             - if klass == 'danger'
-              %input{ type: 'checkbox', name: "user_ids[]",
-                      value: user.id, class: 'checkbox-item', 'data-group' => 'remind_counters',
+              %input{ type: 'checkbox', name: "property_ids[]",
+                      value: property.id, class: 'checkbox-item', 'data-group' => 'remind_counters',
                       checked: false}
   .col-sm-3.pull-right.top20
     = submit_tag 'Напомнить', class: 'btn-primary btn btn-sm pull-right'

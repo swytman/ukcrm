@@ -16,36 +16,8 @@ class User < ActiveRecord::Base
 
   # after_create :welcome_message
 
-  def waiting_counters
-    waiting_month = Helpers::Month.waiting_month
-    result = {}
-    send_required = false
-    return false unless is?(:settler) || village.nil?
-    counters = village.counters.where(:editable_by_settler => true)
-    counters.each do |c|
-      result[c.id] = c.meterings.where(user_id: id, month: waiting_month[:month], year: waiting_month[:year]).
-          order('year DESC, month DESC').try(:first)
-      send_required = true unless result[c.id].present?
 
-    end
-    if send_required
-      result
-    else
-      false
-    end
-  end
 
-  def current_month_counters
-    waiting_month = Helpers::Month.waiting_month
-    result = {}
-    return false unless is?(:settler) || village.nil?
-    counters = village.counters.where(:editable_by_settler => true)
-    counters.each do |c|
-      result[c.id] = c.meterings.where(user_id: id, month: waiting_month[:month], year: waiting_month[:year]).
-          order('year DESC, month DESC').try(:first)
-    end
-    result
-  end
 
   def users
     return User.all if is?(:administrator)

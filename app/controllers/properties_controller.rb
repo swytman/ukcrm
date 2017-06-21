@@ -1,6 +1,6 @@
 class PropertiesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:show, :edit, :update, :destroy, :meterings]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :meterings, :send_counters]
   before_action :set_parents
 
   def index
@@ -49,6 +49,25 @@ class PropertiesController < ApplicationController
     else
       redirect_to village_properties_path(@village), notice: 'Ошибка при удалении'
     end
+  end
+
+  def send_counters
+    if params[:counters].size > 0 && params[:month] && params[:year]
+      params[:counters].keys.each do |c|
+        counter = Counter.find_by(id: c)
+        if counter
+          tariff_id =  counter.tariff_for_month( params[:month].to_i, params[:year].to_i ).try(:id)
+          hash = { tariff_id: tariff_id, property_id: @item.id, month: params[:month], year: params[:year] }
+          metering = Metering.find_by(hash)
+          if metering
+            metering.update_attribute( 'value', params[:counters][c] )
+          else
+            Metering.create( hash.merge!({value: params[:counters][c] }) )
+          end
+        end
+      end
+    end
+    redirect_to root_path
   end
 
   private

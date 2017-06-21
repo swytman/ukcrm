@@ -1,9 +1,9 @@
 .row
-  .col-sm-6
+  .col-sm-4.bordered-card
     - waiting_month = ::Helpers::Month.waiting_month
-    %h5.text-center Показания счетчиков за #{I18n.t("date.one_month_names")[waiting_month[:month]]}
+    .bordered-card_title Показания счетчиков за #{I18n.t("date.one_month_names")[waiting_month[:month]]} для #{property.title}
     %hr
-    = form_for current_user, url: send_counters_user_path(current_user) , html: {class: 'form form-horizontal'} do
+    = form_for current_user, url: send_counters_village_property_path(property.village, property) , html: {class: 'form form-horizontal'} do
       = hidden_field_tag :month, waiting_month[:month]
       = hidden_field_tag :year, waiting_month[:year]
       - waiting_counters.keys.each do |id|
