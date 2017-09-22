@@ -1,5 +1,5 @@
 .row
-  .col-sm-4.bordered-card
+  .col-sm-5.bordered-card
     - waiting_month = ::Helpers::Month.waiting_month
     .bordered-card_title Показания счетчиков за #{I18n.t("date.one_month_names")[waiting_month[:month]]} для #{property.title}
     %hr
